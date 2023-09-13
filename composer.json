@@ -1,9 +1,8 @@
 {
     "name": "agungdhewe/imagetosquare",
-    "description": "resize images di directory menjadi square dan tetap proportional",
     "autoload": {
         "psr-4": {
-            "agungdhewe\\imagetosquare\\": "src/"
+            "Agungdhewe\\Imagetosquare\\": "src/"
         }
     },
     "authors": [
