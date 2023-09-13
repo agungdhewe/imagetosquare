@@ -5,6 +5,7 @@ class BatchResize {
 	public readonly string $TargetDir;
 	public readonly string $List;
 	public readonly int $TargetSize;
+	public readonly string $TempDir;
 
 
 	public function setSource(string $source) : void {
@@ -23,9 +24,14 @@ class BatchResize {
 		$this->List = $list;
 	}
 
+	public function setTempDir(string $tempdir) :  void {
+		$this->TempDir = $tempdir;
+	}
+
 	public function run() {
 
 		$r = new resizer();
+		$r->setTempDir($this->TempDir);
 		try {
 			if (!is_dir($this->SourceDir)) {
 				throw new \Exception("Direktory source '".$this->SourceDir."' tidak ditemukan");
@@ -46,6 +52,7 @@ class BatchResize {
 				if (!is_file($sourcepath)) {
 					throw new \Exception("'$sourcepath' tidak ditemukan");
 				} else {
+					echo "reizing $sourcepath \r\n";
 					$r->resize($sourcepath, $targetpath, $this->TargetSize);
 				}
 			}

@@ -7,6 +7,7 @@ $SOURCE = 'data/source';
 $TARGET = 'data/result';
 $LIST = 'data/listdata.json';
 $TARGETSIZE = 1000;
+$TEMP = 'data/temp';
 
 try {
 
@@ -29,11 +30,18 @@ try {
 		if (!array_key_exists('TARGETSIZE', $ini_array)) {
 			throw new \Exception('TARGETSIZE belum didefinisikan di process.ini');
 		}
+		if (!array_key_exists('TEMP', $ini_array)) {
+			throw new \Exception('TEMP belum didefinisikan di process.ini');
+		}
+
+		
 
 		$SOURCE = $ini_array['SOURCE'];
 		$TARGET = $ini_array['TARGET'];
 		$LIST = $ini_array['LIST'];
 		$TARGETSIZE = $ini_array['TARGETSIZE'];
+		$TEMP = $ini_array['TEMP'];
+
 	}
 
 	echo "\r\n";
@@ -57,6 +65,7 @@ try {
 	}
 
 	$batch = new BatchResize();
+	$batch->setTempDir($TEMP);
 	$batch->setSource(implode('/', [__DIR__, $SOURCE]));
 	$batch->setTarget(implode('/', [__DIR__, $TARGET]));
 	$batch->setTargetSize($TARGETSIZE);
